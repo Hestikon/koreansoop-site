@@ -19,4 +19,6 @@ Disallow: /
 User-agent: OAI-SearchBot
 Allow: /
 
+Content-Signal: ai-train=no, search=yes, ai-input=no
+
 Sitemap: https://koreansoop.uz/sitemap.xml
