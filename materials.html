@@ -58,28 +58,47 @@
           </section>
 
           <section>
-            <h3 id="grammar">[문법]Грамматические упражнения // Grammatik mashqlar</h3>
-            <p><a href="https://drive.google.com/uc?export=download&id=1FaHalRjd5f9XMzNxtT7WMEZHBfiXh4Nk" title="Скачать PDF: Упражнения на корейские частицы 은/는"> Worksheet 001 - 문법 - N은,는,  N이에요,예요 (UZ+RU).</a></p>
-            <p><a href="https://drive.google.com/uc?export=download&id=1U-Va5dIPgOXKsi2L9hKvQddBQlBUNdoy" title="Скачать PDF: Упражнения на официальный стиль вежливости — окончания 입니까 и 입니다">Worksheet 002 - 문법 - N입니까,  N입니다 (UZ+RU).</a></p>
-            <p><a href="https://drive.google.com/uc?export=download&id=17Tb78JLWvUsZrK0HCwxFO1v3vPNv6nUP" title="Скачать PDF: Упражнения на конструкцию отрицания 이/가 아닙니다">Worksheet 003 - 문법 - N이,가 아닙니다 (UZ+RU).</a></p>
-            <p><a href="https://drive.google.com/uc?export=download&id=1NDiUn-jLJwI4DJQd5VJ4bwUK79S-REwa" title="Скачать PDF: Упражнения на корейскую грамматику наличия 이/가 있다">Worksheet 004 - 문법 - 이,가 있다 (UZ+RU).</a></p>
-            <p><a href="https://drive.google.com/uc?export=download&id=15MPon_cy63yFkcdqvANG0bBjVxtAm3-g" title="Скачать PDF: Упражнения на корейскую грамматику отсутствия 이/가 없다">Worksheet 005 - 문법 - 이,가 없다 (UZ+RU).</a></p>
-            <p><a href="https://drive.google.com/uc?export=download&id=1XSsJwi1GG_cLb6NpMLhYiczUYmMBqChC" title="Скачать PDF: Упражнения на корейскую грамматику 이거는,그거는,저거는 + N이에요,예요">Worksheet 006 - 문법 - 이거는,그거는,저거는 + N이에요,예요 (UZ+RU).</a></p>
-            <p><a href="https://drive.google.com/uc?export=download&id=168KqGnJKyzoqflHqAXkikmLKwZBULa_A" title="Скачать PDF: Упражнения на корейскую грамматику N주세요">Worksheet 007 - 문법 - N주세요 (UZ+RU).</a></p>
-            <p><a href="https://drive.google.com/uc?export=download&id=13Ixc8YPPdMNCE1wP453zKB2f7nvQ9Www" title="Скачать PDF: Упражнения на корейскую граммтику N하고 N, N과,와 N">Worksheet 008 - 문법 - N하고 N, N과,와 N (UZ+RU).</a></p>
+                    <h3 id="grammar">[문법]Грамматические упражнения // Grammatik mashqlar</h3>
+                    <div id="grammar-list">Загрузка материалов...</div>
+                  </section>
 
-          </section>
-
-          <section>
-            <p>***</p>
-            <h3 id="reading">[읽기]Готовые уроки - Чтение // Tayyor darslar - O‘qish</h3>
-
-          </section>
+                  <section>
+                    <p>***</p>
+                    <h3 id="reading">[읽기]Готовые уроки - Чтение // Tayyor darslar - O‘qish</h3>
+                    <div id="reading-list">Материалы скоро появятся...</div>
+                  </section>
         </main>
 
 <footer>
 
 </footer>
+
+    <script>
+        function loadCategory(url, containerId) {
+          fetch(url)
+            .then(response => response.json())
+            .then(data => {
+              const container = document.getElementById(containerId);
+              if (data.length === 0) {
+                container.innerHTML = '<p>Раздел в разработке.</p>';
+                return;
+              }
+              container.innerHTML = '';
+              data.forEach(item => {
+                container.innerHTML += `
+                  <p><a href="${item.url}" title="${item.tooltip}">${item.title}</a></p>
+                `;
+              });
+            })
+            .catch(error => {
+              console.error('Ошибка:', error);
+              document.getElementById(containerId).innerHTML = '<p>Ошибка загрузки материалов.</p>';
+            });
+        }
+
+        loadCategory('data/grammar.json', 'grammar-list');
+        loadCategory('data/reading.json', 'reading-list');
+      </script>
 
   </body>
 </html>
